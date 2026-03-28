@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import ThemeToggle from "./ThemeToggle";
 import { SkeletonText } from "./Skeleton";
 import NotificationCenter from "./NotificationCenter";
 import { useNotificationContext } from "../context/NotificationContext";
@@ -53,7 +54,7 @@ export default function Navbar({ isLoading = false }: NavbarProps) {
     <nav className="border-b border-stellar-border bg-stellar-card sticky top-0 z-50" aria-label="Primary" ref={navRef}>
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-stellar-card focus:px-3 focus:py-2 focus:text-white focus:outline-none focus:ring-2 focus:ring-stellar-blue"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-stellar-card focus:px-3 focus:py-2 focus:text-stellar-text-primary focus:outline-none focus:ring-2 focus:ring-stellar-blue"
       >
         Skip to content
       </a>
@@ -62,7 +63,7 @@ export default function Navbar({ isLoading = false }: NavbarProps) {
           <div className="flex items-center space-x-8">
             <Link
               to="/"
-              className="text-xl font-bold text-white focus:outline-none focus:ring-2 focus:ring-stellar-blue focus:ring-offset-2 focus:ring-offset-stellar-card rounded-sm"
+              className="text-xl font-bold text-stellar-text-primary focus:outline-none focus:ring-2 focus:ring-stellar-blue focus:ring-offset-2 focus:ring-offset-stellar-card rounded-sm"
               aria-label="Bridge Watch home"
             >
               Bridge <span className="text-stellar-blue">Watch</span>
@@ -76,7 +77,7 @@ export default function Navbar({ isLoading = false }: NavbarProps) {
                   className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                     location.pathname === link.to
                       ? "bg-stellar-blue text-white"
-                      : "text-stellar-text-secondary hover:text-white"
+                      : "text-stellar-text-secondary hover:text-stellar-text-primary"
                   } focus:outline-none focus:ring-2 focus:ring-stellar-blue focus:ring-offset-2 focus:ring-offset-stellar-card`}
                 >
                   {link.label}
@@ -84,6 +85,9 @@ export default function Navbar({ isLoading = false }: NavbarProps) {
               ))}
             </div>
           </div>
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            <div className="text-sm text-stellar-text-secondary">Stellar Network Monitor</div>
 
           <div className="flex items-center gap-4">
             <button
