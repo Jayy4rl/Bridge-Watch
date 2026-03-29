@@ -20,6 +20,9 @@ export async function buildServer() {
     logger: logger,
   });
 
+  // Register tracing middleware first (to capture all requests)
+  await registerTracing(server as any);
+
   // Register plugins
   await server.register(cors, {
     origin: true,
@@ -32,6 +35,9 @@ export async function buildServer() {
 
   // Sliding-window Redis rate limiting (replaces the simple @fastify/rate-limit global)
   await registerRateLimiting(server as any);
+
+  // Data validation middleware
+  await registerValidation(server as any);
 
   await server.register(websocket);
 
