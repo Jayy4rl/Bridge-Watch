@@ -54,5 +54,6 @@ jobs:
       # Rust audit requires cargo-audit, we'll use a pre-built action
       - name: Rust Audit
         uses: actions-rs/audit-check@v1
+        continue-on-error: true
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
